@@ -1,0 +1,18 @@
+services:
+  app:
+    container_name: ${CONTAINER_NAME}
+    image: ${IMAGE_NAME}
+    build:
+      context: ${BUILD_CONTEXT}
+      dockerfile: ${DOCKERFILE_PATH}
+    ports:
+      - "${HOST_PORT}:${CONTAINER_PORT}"
+    env_file:
+      - .env
+    environment:
+      - ENV_MODE=${ENV_MODE}
+    restart: unless-stopped
+    volumes:
+        - type: bind
+          source: .
+          target: /app/
